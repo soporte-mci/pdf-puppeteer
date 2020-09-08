@@ -57,3 +57,12 @@ typings/
 # dotenv environment variables file
 .env
 
+package-lock.json
+package-lock.json
+example/PDF-Puppeteer.postman_collection.json
+example/response.pdf
+example/response2.pdf
+example/response3.pdf
+example/PDF-Puppeteer.postman_collection.json
+example/package-lock.json
+package-lock.json

@@ -11,6 +11,8 @@
   "dependencies": {
     "body-parser": "^1.18.2",
     "express": "^4.16.3",
-    "pdf-puppeteer": "file:../../pdf-puppeteer"
+    "nodemailer": "6.4.11",
+    "pdf-puppeteer": "file:../../pdf-puppeteer",
+    "request": "2.88.2"
   }
 }
