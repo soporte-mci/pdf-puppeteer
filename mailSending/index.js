@@ -70,7 +70,7 @@ router.route('/chart').post(async function (req, res) {
           console.log('Correo enviado')
         })
       })
-      res.send(pdf)
+      res.status(200).send('OK')
     },
     null,
     null,
@@ -81,7 +81,7 @@ router.route('/chart').post(async function (req, res) {
   })
 })
 
-router.route('/csv').post(async function (req, res) {
+router.route('/csv').post(async function (req, response) {
   request(url, options, (error, res, body) => {
     if (error) {
       return console.log(error)
@@ -116,7 +116,7 @@ router.route('/csv').post(async function (req, res) {
             return console.log(error)
           }
           console.log('Correo enviado a ivan.espin@mcimanager.com')
-          return res.status(200).send('Mail sent')
+          return response.status(200).send('Mail sent')
         })
       })
     }
