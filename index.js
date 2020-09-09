@@ -1,4 +1,4 @@
-const convertHTMLToPDF = require('./src/convertHTMLToPDF');
-const convertUrlToPDF = require('./src/convertUrlToPDF');
+const convertHTMLToPDF = require('./pdfConverters/convertHTMLToPDF');
+const convertUrlToPDF = require('./pdfConverters/convertUrlToPDF');
 module.exports = convertHTMLToPDF;
 module.exports = convertUrlToPDF;
