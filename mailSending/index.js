@@ -10,6 +10,19 @@ const request = require('request')
 let url = 'http://localhost:3000/dailyReport'
 let options = { csv: true }
 
+
+
+const transporter = nodemailer.createTransport({
+  host: 'smtp.1and1.es',
+  port: 25,
+  secure: false,
+  auth: {
+    user: 'travel@geoboxtraveltracker.com',
+    pass: 'Soporte1234'
+  }
+})
+
+
 // prevent cors issue for the test html by file ref
 // don't use in production
 app.use(function (req, res, next) {
@@ -22,6 +35,8 @@ app.use(function (req, res, next) {
   res.setHeader('Access-Control-Allow-Credentials', true)
   next()
 })
+app.use(express.json())
+
 
 // Example PDF route, can be used with the postman profile
 // to test different option configurations, for example:
@@ -42,15 +57,6 @@ router.route('/chart').post(async function (req, res) {
           console.log(err)
           return err
         }
-        let transporter = nodemailer.createTransport({
-          host: 'smtp.1and1.es',
-          port: 25,
-          secure: false,
-          auth: {
-            user: 'travel@geoboxtraveltracker.com',
-            pass: 'Soporte1234'
-          }
-        })
 
         let mailOptions = {
           from: 'travel@geoboxtraveltracker.com', // sender address
@@ -82,6 +88,7 @@ router.route('/chart').post(async function (req, res) {
 })
 
 router.route('/csv').post(async function (req, response) {
+  console.log(req.body)  
   request(url, options, (error, res, body) => {
     if (error) {
       return console.log(error)
@@ -92,15 +99,7 @@ router.route('/csv').post(async function (req, response) {
         if (err) {
           console.log(err)
         }
-        let transporter = nodemailer.createTransport({
-          host: 'smtp.1and1.es',
-          port: 25,
-          secure: false,
-          auth: {
-            user: 'travel@geoboxtraveltracker.com',
-            pass: 'Soporte1234'
-          }
-        })
+
         let mailOptions = {
           from: 'travel@geoboxtraveltracker.com', // sender address
           to: 'ivan.espin@mcimanager.com',
