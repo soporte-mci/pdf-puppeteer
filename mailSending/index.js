@@ -1,3 +1,5 @@
+
+require('dotenv').config({ path: '../config/.env' })
 const express = require('express')
 const bodyParser = require('body-parser')
 const http = require('http')
@@ -7,21 +9,17 @@ const app = express()
 const router = express.Router()
 const nodemailer = require('nodemailer')
 const request = require('request')
-let url = 'http://localhost:3000/dailyReport'
-let options = { csv: true }
-
-
+const options = { csv: true }
 
 const transporter = nodemailer.createTransport({
-  host: 'smtp.1and1.es',
-  port: 25,
+  host: process.env.mailHost,
+  port: process.env.mailPort,
   secure: false,
   auth: {
-    user: 'travel@geoboxtraveltracker.com',
-    pass: 'Soporte1234'
+    user: process.env.mailUserAuth,
+    pass: process.env.passUserAuth
   }
 })
-
 
 // prevent cors issue for the test html by file ref
 // don't use in production
@@ -36,7 +34,6 @@ app.use(function (req, res, next) {
   next()
 })
 app.use(express.json())
-
 
 // Example PDF route, can be used with the postman profile
 // to test different option configurations, for example:
@@ -88,10 +85,17 @@ router.route('/chart').post(async function (req, res) {
 })
 
 router.route('/csv').post(async function (req, response) {
-  console.log(req.body)  
-  request(url, options, (error, res, body) => {
+  console.log(req.body)
+  let url = process.env.urlReportsService + process.env.portReportsService + '/'
+  let objBody = req.body
+  let report = objBody.report
+  let computedUrl = url + report
+
+  console.log('url:' + computedUrl)
+  request(computedUrl, options, (error, res, body) => {
     if (error) {
-      return console.log(error)
+      console.log(error)
+      return response.status(500).send(error)
     }
 
     if (!error && res.statusCode == 200) {
@@ -101,7 +105,7 @@ router.route('/csv').post(async function (req, response) {
         }
 
         let mailOptions = {
-          from: 'travel@geoboxtraveltracker.com', // sender address
+          from: process.env.mailOptionsFrom, // sender address
           to: 'ivan.espin@mcimanager.com',
           subject: 'Test of fcc reports',
           html: 'Test of fcc reports',
@@ -112,7 +116,8 @@ router.route('/csv').post(async function (req, response) {
         }
         transporter.sendMail(mailOptions, (error, info) => {
           if (error) {
-            return console.log(error)
+            console.log(error)
+            return response.status(500).send(error)
           }
           console.log('Correo enviado a ivan.espin@mcimanager.com')
           return response.status(200).send('Mail sent')
@@ -156,6 +161,7 @@ app.use(
 app.use('/api', router)
 
 // Start the server.
-var port = 3001
+var port = process.env.port // 3001
 http.createServer(app).listen(port)
 console.log('Server listening on port ' + port)
+console.log('.env numero: ' + process.env.numero)

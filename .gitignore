@@ -66,3 +66,4 @@ example/response3.pdf
 example/PDF-Puppeteer.postman_collection.json
 example/package-lock.json
 package-lock.json
+.DS_Store

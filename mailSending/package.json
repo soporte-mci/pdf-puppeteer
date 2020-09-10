@@ -6,15 +6,17 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node index.js",
-    "dev": "./node_modules/nodemon/bin/nodemon.js index.js"    
+    "dev": "./node_modules/nodemon/bin/nodemon.js index.js"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "body-parser": "^1.18.2",
+    "dotenv": "8.2.0",
     "express": "^4.16.3",
     "nodemailer": "6.4.11",
     "nodemon": "2.0.4",
+    "path": "0.12.7",
     "pdf-puppeteer": "file:../../pdf-puppeteer",
     "request": "2.88.2"
   }
