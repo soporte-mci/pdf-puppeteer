@@ -1,0 +1,8 @@
+{
+    // Comments are allowed!
+    "uid": "FCC Convert Mailing",
+    "append": true,
+    "watch": true,
+    "script": "../mailSending/index.js",
+    "command": "npm start"
+}

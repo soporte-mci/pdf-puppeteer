@@ -161,7 +161,7 @@ app.use(
 app.use('/api', router)
 
 // Start the server.
-var port = process.env.port // 3001
+var port = process.env.port || 3001
 http.createServer(app).listen(port)
 console.log('Server listening on port ' + port)
-console.log('.env numero: ' + process.env.numero)
+// console.log('.env numero: ' + process.env.numero)
