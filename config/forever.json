@@ -4,5 +4,5 @@
     "append": true,
     "watch": true,
     "script": "../mailSending/index.js",
-    "command": "npm start"
+    "command": "npm start "
 }

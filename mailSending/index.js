@@ -85,7 +85,7 @@ router.route('/chart').post(async function (req, res) {
 })
 
 router.route('/csv').post(async function (req, response) {
-  console.log(req.body)
+  //console.log(req.body)
   let url = process.env.urlReportsService + process.env.portReportsService + '/'
   let objBody = req.body
   let report = objBody.report
